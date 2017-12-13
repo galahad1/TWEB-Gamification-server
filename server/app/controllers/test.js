@@ -13,6 +13,6 @@ router.get('/test', (req, res, next) => {
 res.render('index', {
   title: 'Test page',
   articles: articles
-});
-});
+    });
+  });
 });
