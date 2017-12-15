@@ -7,12 +7,12 @@ module.exports = (app) => {
   app.use('/', router);
 };
 
-router.get('/test', (req, res, next) => {
+router.get('/scoreboard', (req, res, next) => {
   Article.find((err, articles) => {
   if (err) return next(err);
 res.render('index', {
-  title: 'Test page',
+  title: 'Scoreboard',
   articles: articles
-    });
+   });
   });
 });
