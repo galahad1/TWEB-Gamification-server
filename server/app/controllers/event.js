@@ -12,28 +12,24 @@ router.post('/event', (req, res) => {
 
   const payload = req.body;
 
-  var score = 0;
+  var incrementScore = 0;
 
   if(payload.type === "login")
   {
-    score = processStrengthScore(payload.properties.strength)
+    incrementScore = processStrengthScore(payload.properties.strength)
   }
 
+  //todo if user not exsiste controler et si marche pas demander
+  // update user score
+  User.update({username: payload.properties.username},{$inc: {score:incrementScore}}, function (err) {
 
-  //insert in db
-  var user = new User({
-    username: payload.properties.username,
-    score: score
-  });
-
-  user.save(function (err, user) {
-    if(err) {
-      //http error
-      console.log(err);
+  if (err) {
+    return handleError(err);
+  }
+  else {
+    res.send("Score update successfully");
     }
-  });
-
-  res.send("Score update successfully");
+  })
 
 });
 
@@ -49,3 +45,20 @@ function processStrengthScore(strength) {
   var score = strength * 100;
   return score;
 }
+
+
+//todo endpoint create user
+/*
+//insert in db
+var user = new User({
+  username: payload.properties.username,
+  score: score
+});
+
+user.save(function (err, user) {
+  if(err) {
+    //http error
+    console.log(err);
+  }
+});
+*/
