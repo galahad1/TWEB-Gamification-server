@@ -1,3 +1,9 @@
+/**
+ * This endpoint is used to create an user
+ * with a POST method
+ * @author Tano Iannetta
+ */
+
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');

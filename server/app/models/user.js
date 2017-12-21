@@ -1,5 +1,7 @@
-// Users model
-
+/**
+ * Model of an user with an username and a score
+ * @author Tano Iannetta
+ */
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 

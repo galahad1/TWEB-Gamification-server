@@ -1,3 +1,8 @@
+/**
+ * This endpoint is used to update the score of an user
+ * with a POST method
+ * @author Tano Iannetta
+ */
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
@@ -20,17 +25,16 @@ router.post('/event', (req, res) => {
   }
 
   //todo if user not exsiste controler et si marche pas demander
-  // update user score
+  // update user's score
   User.update({username: payload.properties.username},{$inc: {score:incrementScore}}, function (err) {
 
   if (err) {
-    return handleError(err);
+    res.send("Error occurs")
   }
   else {
     res.send("Score update successfully");
     }
-  })
-
+  });
 });
 
 
@@ -45,20 +49,3 @@ function processStrengthScore(strength) {
   var score = strength * 100;
   return score;
 }
-
-
-//todo endpoint create user
-/*
-//insert in db
-var user = new User({
-  username: payload.properties.username,
-  score: score
-});
-
-user.save(function (err, user) {
-  if(err) {
-    //http error
-    console.log(err);
-  }
-});
-*/
