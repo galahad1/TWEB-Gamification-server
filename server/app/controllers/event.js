@@ -7,6 +7,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const ScoreProcessor = require('../services/scoreProcessor');
 
 module.exports = (app) => {
   app.use('/', router);
@@ -16,36 +17,25 @@ module.exports = (app) => {
 router.post('/event', (req, res) => {
 
   const payload = req.body;
+  let scoreProcessor = new ScoreProcessor();
 
-  var incrementScore = 0;
+  let incrementScore = 0;
 
   if(payload.type === "login")
   {
-    incrementScore = processStrengthScore(payload.properties.strength)
+    incrementScore = scoreProcessor.processStrengthScore(payload.properties.strength)
   }
 
-  //todo if user not exsiste controler et si marche pas demander
   // update user's score
-  User.update({username: payload.properties.username},{$inc: {score:incrementScore}}, function (err) {
-
+  User.findOneAndUpdate({username: payload.properties.username},{$inc: {score:incrementScore}}, function (err, user) {
   if (err) {
-    res.send("Error occurs")
+    res.send("Error occurs") //todo
   }
-  else {
+  else if(user){
     res.send("Score update successfully");
+    }
+  else {
+      res.send("User does not exists");
     }
   });
 });
-
-
-//todo mettre dans la class processor
-/**
- * Calculus the score from the strength of a password
- * @param strength of the password
- * @returns score calculated
- */
-function processStrengthScore(strength) {
-
-  var score = strength * 100;
-  return score;
-}

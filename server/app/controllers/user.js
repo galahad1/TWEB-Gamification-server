@@ -13,10 +13,9 @@ module.exports = (app) => {
   app.use('/', router);
 };
 
-  // POST method
-  router.post('/user', (req, res) => {
-
-    const payload = req.body;
+// POST method
+router.post('/user', (req, res) => {
+  const payload = req.body;
 
   var score = 0;
 
@@ -28,7 +27,7 @@ module.exports = (app) => {
 
   user.save(function (err, user) {
     if(err) {
-      res.send("User already exist");
+      res.send(err);
     }
     else
     {
