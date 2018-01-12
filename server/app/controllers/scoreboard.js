@@ -18,24 +18,11 @@ router.get('/scoreboard', (req, res, next) => {
   User.find({}, 'username score -_id', (err, usersDb) => {
   if (err) return next(err);
 
-  //todo tester sur 2-3 jours
-  //get user last 30 days points
-
-  /*
-  Event.find({createdAt: {$gt: Date.now()*1000-30*24*60*60}}, (err, events) =>{
-      if(err) return next(err);
-
-      console.log(events);
-    });
-  */
-
-
-    let users = usersDb;
-
+    // looks events collection to get player that score recently
     Event.aggregate([
       {
         $match: {
-          createdAt: {$gte: new Date(new Date().getTime() - 1 * 24 * 60 * 60 * 1000)}
+          createdAt: {$gte: new Date(new Date().getTime() - 30 * 24 * 60 * 60 * 1000)}
         }
       },
       {
@@ -48,83 +35,29 @@ router.get('/scoreboard', (req, res, next) => {
       if (err) {
         next(err);
       } else {
-       // console.log(result + " assa");
-        //res.json(result);
 
-        //console.log(users);
-
-
-/*
-        // merge arrays of on usernames
-        var tab = users
-          .concat(result)
-          .groupBy('username')
-          .map(_.spread(_.curry(_.merge, {})))
-          .value();
-
-
-        console.log(tab);*/
-
-/*
-        let tab = users.map((user) => {
-          console.log(result);
-          for(let obj of result){
-            console.log(obj._id);
-            if(user.username === obj._id) Object.assign(user, result);
-          }
-          return user;
-        });*/
-
-        let usersmap = new Map(users.map((user) => {
-          return [user.username, user];
-        }));
-
+        // convert in map
         let resultmap = new Map(result.map((user) => {
           return [user._id  , user];
         }));
 
-        console.log(usersmap);
-        console.log(resultmap);
+        let completeUsers = usersDb.map((user) => {
+            let completeUser = {
+            username: user.username,
+            score: user.score
+          };
 
-        //      console.log(users);
-
-        let completeUsers = users.map((user) => {
-
-
-          let completeUser = user;
-
+          // if user did not score recently
           if(resultmap.get(user.username) === undefined)
           {
             completeUser.recentScore = 0;
             return completeUser;
           }
-
-          let toto = {};
-          toto.titi = "tutu";
-          console.log(toto);
-
-          console.log(Object.isSealed(user));
-          console.log(Object.isFrozen(user));
-          console.log(Object.isExtensible(user));
-
-
           completeUser.recentScore = resultmap.get(user.username).recentScore;
-          completeUser.toto = "titi";
-
-          console.log(user);
-          console.log("user result: " + completeUser);
-          console.log(resultmap.get(user.username).recentScore);
-          //completeUser.recentScore = userResult.recentScore;
-//            console.log(user);
-            return completeUser;
+          return completeUser;
         });
 
-        // check if all users have recentscore
-
         res.json(completeUsers);
-
-
-        //console.log(completeUsers);
       }
     });
 
