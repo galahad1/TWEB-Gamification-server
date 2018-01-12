@@ -7,6 +7,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const Event = mongoose.model('Event');
 const ScoreProcessor = require('../services/scoreProcessor');
 
 module.exports = (app) => {
@@ -29,9 +30,13 @@ router.post('/event', (req, res) => {
   // update user's score
   User.findOneAndUpdate({username: payload.properties.username},{$inc: {score:incrementScore}}, function (err, user) {
   if (err) {
-    res.send("Error occurs") //todo
+    res.send(err) //todo envoie json error
   }
   else if(user){
+
+    const event = new Event({username: user.username, score: incrementScore})
+    event.save();
+
     res.send("Score update successfully");
     }
   else {
