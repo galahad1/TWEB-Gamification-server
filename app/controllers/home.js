@@ -15,7 +15,7 @@ module.exports = (app) => {
 router.get('/', (req, res, next) => {
   Article.find((err, articles) => {
   if (err) return next(err);
-res.render('index', {
+    res.render('index', {
   title: 'Home page',
   articles: articles
     });

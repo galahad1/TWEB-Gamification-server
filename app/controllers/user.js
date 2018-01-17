@@ -16,11 +16,11 @@ module.exports = (app) => {
 // POST method
 router.post('/user', (req, res) => {
   const payload = req.body;
+  console.log("/user payload received: " + JSON.stringify(payload)); // in heroku logs
 
-  var score = 0;
-
+  let score = 0;
   //insert in db
-  var user = new User({
+  let user = new User({
     username: payload.properties.username,
     score: 0
   });

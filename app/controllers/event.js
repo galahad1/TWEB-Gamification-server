@@ -22,7 +22,7 @@ router.post('/event', (req, res) => {
 
   let incrementScore = 0;
 
-  console.log("/event payload received: " + JSON.stringify(payload));
+  console.log("/event payload received: " + JSON.stringify(payload)); // in heroku logs
 
 
   if(payload.type === "login")
@@ -31,10 +31,10 @@ router.post('/event', (req, res) => {
   }
 
   // update user's score
-  User.findOneAndUpdate({username: payload.properties.username},{$inc: {score:incrementScore}}, function (err, user) {
+  User.findOneAndUpdate({username: payload.properties.username},{$inc: {score:incrementScore}}, {upsert:true, new :true}, function (err, user) {
   if (err) {
     console.log(err);
-    res.send(err) //todo envoie json error
+    res.send(err);
   }
   else if(user){
 
@@ -44,7 +44,7 @@ router.post('/event', (req, res) => {
     res.send("Score update successfully");
     }
   else {
-      res.send("User does not exists");
+      res.send("Error occurred");
     }
   });
 });
