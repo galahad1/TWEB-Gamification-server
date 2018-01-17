@@ -4,6 +4,7 @@ const express = require('express');
 const config = require('./config/config');
 const glob = require('glob');
 const mongoose = require('mongoose');
+const cors = require('cors')
 
 mongoose.connect(config.db);
 const db = mongoose.connection;
@@ -16,6 +17,8 @@ models.forEach(function (model) {
   require(model);
 });
 const app = express();
+app.use(cors())
+
 
 module.exports = require('./config/express')(app, config);
 
