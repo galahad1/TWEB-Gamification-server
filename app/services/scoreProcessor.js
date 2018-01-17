@@ -12,7 +12,7 @@ class ScoreProcessor {
    * @returns score calculated
    */
   processStrengthScore(strenght) {
-    var score = strenght * 100;
+    var score = strenght * 1;
     return score;
   }
 };
