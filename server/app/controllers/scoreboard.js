@@ -60,15 +60,5 @@ router.get('/scoreboard', (req, res, next) => {
         res.json(completeUsers);
       }
     });
-
-
-// todo tester si 0 personnes dans le recent score
-
-
-
-
-
-
-
   });
 });
