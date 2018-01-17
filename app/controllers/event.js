@@ -22,7 +22,7 @@ router.post('/event', (req, res) => {
 
   let incrementScore = 0;
 
-  console.log("/event payload received: " + payload);
+  console.log("/event payload received: " + JSON.stringify(payload));
 
 
   if(payload.type === "login")
