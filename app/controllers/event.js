@@ -22,6 +22,9 @@ router.post('/event', (req, res) => {
 
   let incrementScore = 0;
 
+  console.log("/event payload received: " + payload);
+
+
   if(payload.type === "login")
   {
     incrementScore = scoreProcessor.processStrengthScore(payload.properties.strength)
@@ -30,6 +33,7 @@ router.post('/event', (req, res) => {
   // update user's score
   User.findOneAndUpdate({username: payload.properties.username},{$inc: {score:incrementScore}}, function (err, user) {
   if (err) {
+    console.log(err);
     res.send(err) //todo envoie json error
   }
   else if(user){
