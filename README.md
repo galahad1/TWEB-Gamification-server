@@ -7,7 +7,7 @@ This is an express server for gamification.
 ## Purpose
 The goal of this server is the gamification of any work environment.
 For the client you will give points for any achievement you want when using your applications.
-As an example we implemented a client in the context of a login. We give points depending of the password's strength. You can find the client application [here](https://github.com/lassalleloan/TWEB-Gamification-client/settings)
+As an example we implemented a client in the context of a login. We give points depending of the password's strength. You can find the client application [here](https://github.com/lassalleloan/TWEB-Gamification-client/)
 
 
 As we work with contexts you can easily define different weight to the points of a given application's context (1 point in the login context may match 0.1 point in an other context, hour connected to a given work application, for instance).
