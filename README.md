@@ -50,4 +50,4 @@ https://stormy-hamlet-80891.herokuapp.com/user
 
 ## Scoreboard
 
-To display the Scoreboard simply make a GET request on https://stormy-hamlet-80891.herokuapp.com/scoreboards
+To display the Scoreboard simply make a GET request on https://stormy-hamlet-80891.herokuapp.com/scoreboard
