@@ -34,8 +34,8 @@ https://stormy-hamlet-80891.herokuapp.com/event
 	}
 }`
 
-* App is the application that made the post request.
-* Type is the context from which the users will earns points. It is used to give different weights depending of the type.
+* app is the application that made the post request.
+* type is the context from which the users will earns points. It is used to give different weights depending of the type.
 * username: The player who make points
 * strength: Is the strength of the password in the login of the mail application.
 
