@@ -19,7 +19,6 @@ models.forEach(function (model) {
 const app = express();
 app.use(cors())
 
-
 module.exports = require('./config/express')(app, config);
 
 app.listen(config.port, () => {

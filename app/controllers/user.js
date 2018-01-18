@@ -21,7 +21,7 @@ router.post('/user', (req, res) => {
   let score = 0;
   //insert in db
   let user = new User({
-    username: payload.properties.username,
+    username: payload.username,
     score: 0
   });
 

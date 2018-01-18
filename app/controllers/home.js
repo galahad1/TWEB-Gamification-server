@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
-const Article = mongoose.model('Article');
 
 /**
  * This endpoint is the default page of the API
@@ -13,11 +11,8 @@ module.exports = (app) => {
 };
 
 router.get('/', (req, res, next) => {
-  Article.find((err, articles) => {
-  if (err) return next(err);
-    res.render('index', {
-  title: 'Home page',
-  articles: articles
-    });
+
+  res.render('index', {
+    title: 'Gamification server'
   });
 });
