@@ -51,3 +51,13 @@ https://stormy-hamlet-80891.herokuapp.com/user
 ## Scoreboard
 
 To display the Scoreboard simply make a GET request on https://stormy-hamlet-80891.herokuapp.com/scoreboard
+
+`{
+  "username": "test",
+  "score": 4300,
+  "recentScore": 4300
+}`
+
+* username: username of a player
+* score: Total score of an user
+* recentScore: score made this last 30 days
