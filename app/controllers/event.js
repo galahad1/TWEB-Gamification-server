@@ -41,7 +41,7 @@ router.post('/event', (req, res) => {
     const event = new Event({username: user.username, score: incrementScore})
     event.save();
 
-    res.send("Score update successfully");
+    res.send("Score updated  successfully");
     }
   else {
       res.send("Error occurred");
