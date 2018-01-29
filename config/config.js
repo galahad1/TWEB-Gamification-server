@@ -30,7 +30,7 @@ const config = {
     },
     port: process.env.PORT || 3000,
     //db: 'mongodb://localhost/server-production'
-    db: 'mongodb://heroku_sqzx4m44:tv1ja10io6kqj8iou6ls6cu5gb@ds259117.mlab.com:59117/heroku_sqzx4m44'
+    db: process.env.MONGODB_URI
   }
 };
 
