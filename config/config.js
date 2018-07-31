@@ -10,7 +10,6 @@ const config = {
       name: 'server'
     },
     port: process.env.PORT || 3000,
-    //db: 'mongodb://heroku_sqzx4m44:tv1ja10io6kqj8iou6ls6cu5gb@ds259117.mlab.com:59117/heroku_sqzx4m44'
     db: 'mongodb://localhost/server-development'
   },
 
